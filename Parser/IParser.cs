@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 namespace Parser
 {
-    public class IParser
+    public interface IParser
     {
-        Task<List<Model>> GetByName(string namePart);
-        Task<List<Model>> GetByParameters(ParserSettings parserSettings);
+        Task<List<ParsedDataDetail>> GetByName(string namePart);
+        Task<List<ParsedDataDetail>> GetByParameters(ParserSettings parserSettings);
     }
 }
