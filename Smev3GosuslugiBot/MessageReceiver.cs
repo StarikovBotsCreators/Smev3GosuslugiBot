@@ -13,7 +13,7 @@ namespace Smev3GosuslugiBot
 {
     public class MessageReceiver : IUpdateHandler, IMessageReceiver
     {
-        private Dictionary<long, IState> _stateOfPersons = new Dictionary<long, IState>();
+        private Dictionary<long, Client> _stateOfPersons = new Dictionary<long, Client>();
 
         private Dictionary<Type, IState> _statePool;
 
@@ -37,15 +37,15 @@ namespace Smev3GosuslugiBot
             if(update.Type != UpdateType.Message && update.Type !=  UpdateType.CallbackQuery)
                 return;
             
-            IState userState;
+            Client client;
             Chat messageChat = update.GetChat();
-            if (!_stateOfPersons.TryGetValue(messageChat.Id, out userState))
+            if (!_stateOfPersons.TryGetValue(messageChat.Id, out client))
             {
                 EnterStateOf<SetupState>(botClient, update, cancellationToken);
-                userState = StateInstanceOf<SetupState>();
+                client.CurrentState = StateInstanceOf<SetupState>();
             }
 
-            await userState.Update(botClient, update, cancellationToken);
+            await client.CurrentState.Update(botClient, update, cancellationToken);
         }
 
         public Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
@@ -54,13 +54,18 @@ namespace Smev3GosuslugiBot
             return Task.CompletedTask;
         }
 
+        public Client GetCurrentClient(Update update)
+        {
+            return _stateOfPersons[update.GetUser().Id];
+        }
+
         public void EnterStateOf<TState>(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken) where TState : IState
         {
-            if(_stateOfPersons.TryGetValue(update.GetUser().Id, out IState state))
-                state.Exit(botClient, update, cancellationToken);
+            if(_stateOfPersons.TryGetValue(update.GetUser().Id, out Client client))
+                client.CurrentState.Exit(botClient, update, cancellationToken);
             
             TState stateInstanceOf = StateInstanceOf<TState>();
-            _stateOfPersons[update.GetUser().Id] = stateInstanceOf;
+            _stateOfPersons[update.GetUser().Id].CurrentState = stateInstanceOf;
             stateInstanceOf.Enter(botClient, update, cancellationToken);
         }
 

@@ -7,5 +7,6 @@ namespace Parser
     {
         Task<List<ParsedDataDetail>> GetByName(string namePart);
         Task<List<ParsedDataDetail>> GetByParameters(ParserSettings parserSettings);
+        Task Processed();
     }
 }

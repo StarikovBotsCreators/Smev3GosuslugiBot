@@ -92,6 +92,8 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Application.cs" />
+        <Compile Include="Client.cs" />
         <Compile Include="IMessageReceiver.cs" />
         <Compile Include="MessageReceiver.cs" />
         <Compile Include="Program.cs" />
@@ -116,6 +118,12 @@
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Parser\Parser.csproj">
+        <Project>{3d2c83bf-8c77-4016-a89a-995aa5a674b6}</Project>
+        <Name>Parser</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

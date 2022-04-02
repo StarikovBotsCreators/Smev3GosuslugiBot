@@ -8,6 +8,7 @@ namespace Smev3GosuslugiBot
 {
     public interface IMessageReceiver
     {
+        Client GetCurrentClient(Update update);
         void EnterStateOf<TState>(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken) where TState : IState;
     }
 }
