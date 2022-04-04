@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smev3GosuslugiBot", "Smev3G
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser", "Parser\Parser.csproj", "{3D2C83BF-8C77-4016-A89A-995AA5A674B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParsingBackground", "..\..\..\..\source\repos\ParsingBackground\ParsingBackground\ParsingBackground.csproj", "{8F34C0CC-C6E6-41CF-A3AF-608B971811EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParsingBackground", "ParsingBackground\ParsingBackground.csproj", "{8F34C0CC-C6E6-41CF-A3AF-608B971811EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
